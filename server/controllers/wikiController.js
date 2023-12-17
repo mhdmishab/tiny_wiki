@@ -1,5 +1,6 @@
 import axios from "axios";
-import cheerio from "cheerio";
+import SearchKeyword from "../model/keywordModel.js";
+import pageData from "../model/PageDataModel.js";
 
 export const SearchTerm=async(req,res)=>{
     try {
@@ -13,11 +14,16 @@ export const SearchTerm=async(req,res)=>{
           // snippet: result.snippet,
           pageId: result.pageid,
         }));
-    
+
+        const searchKeyword=new SearchKeyword({
+          keyword:searchTerm
+        })
+        searchKeyword.save();
+
         res.json({ results: searchResults });
       } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        throw error;
       }
 }
 
@@ -29,15 +35,36 @@ export const ReadSlug=async (req, res) => {
     const htmlResponse = await axios.get(`https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&pageids=${slug}&utf8=1`);
     console.log(htmlResponse)
     const pageContent = htmlResponse.data.query.pages[slug].extract;
+    const pageTitle= htmlResponse.data.query.pages[slug].title;
 
     if (pageContent) {
-
+      const data= new pageData({
+        pageId:slug,
+        pageTitle:pageTitle
+      })
+      data.save();
       res.json({content:pageContent});
     } else {
       res.status(404).json({ error: 'Page not found' });
     }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    throw error;
   }
 };
+
+export const mostSerachedKeyword=async(req,res)=>{
+  const order = req.params.order === 'asc' ? 1 : -1;
+  console.log(order)
+
+  try {
+    const result = await SearchKeyword.aggregate([
+      { $group: { _id: '$keyword', count: { $sum: 1 } } },
+      { $sort: { count: order } },
+    ]);
+
+    res.json(result);
+  } catch (error) {
+    throw error;
+  }
+}

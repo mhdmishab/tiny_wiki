@@ -3,8 +3,10 @@ import morgan from 'morgan';
 import dotenv from 'dotenv';
 import route from './routes/wikiRoute.js';
 import adminRoute from './routes/adminRoute.js';
+import dbConnection  from './connection/dbConfig.js';
 
 dotenv.config();
+dbConnection();
 
 const app = express();
 
