@@ -43,7 +43,10 @@ export const ReadSlug=async (req, res) => {
         pageTitle:pageTitle
       })
       data.save();
-      res.json({content:pageContent});
+      res.json({
+        title:pageTitle,
+        content:pageContent
+      });
     } else {
       res.status(404).json({ error: 'Page not found' });
     }
