@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import route from './routes/wikiRoute.js';
 import adminRoute from './routes/adminRoute.js';
 import dbConnection  from './connection/dbConfig.js';
+import cors from 'cors'
 
 dotenv.config();
 dbConnection();
@@ -12,6 +13,7 @@ const app = express();
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 app.use(express.json());
+app.use(cors());
 
 app.use('/test', (req, res) => {
   res.send('ok');

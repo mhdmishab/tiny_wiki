@@ -1,8 +1,8 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import counterReducer from "../slices/wikiSlice";
+import wikiReducer from "../slices/wikiSlice";
 
 const rootReducer=combineReducers({
-    counter : counterReducer
+    wiki : wikiReducer
 })
 
 export default rootReducer

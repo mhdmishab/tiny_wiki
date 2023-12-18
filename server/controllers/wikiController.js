@@ -11,7 +11,7 @@ export const SearchTerm=async(req,res)=>{
        
         const searchResults = response.data.query.search.map((result) => ({
           title: result.title,
-          // snippet: result.snippet,
+          snippet: result.snippet,
           pageId: result.pageid,
         }));
 
