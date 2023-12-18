@@ -28,7 +28,7 @@ git clone https://github.com/mhdmishab/tiny_wiki.git
 
 Navigate to the `client` directory within the cloned project using the command:
 ```bash
-cd sweet_tweet/client
+cd tiny_wiki/client
  
 ```
 
