@@ -13,7 +13,8 @@ const app = express();
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
+app.use(cors({ origin: ['http://localhost:5173', 'https://sweettweet.netlify.app'] }));
 
 app.use('/test', (req, res) => {
   res.send('ok');

@@ -2,6 +2,7 @@ import axios from "axios";
 import SearchKeyword from "../model/keywordModel.js";
 import pageData from "../model/PageDataModel.js";
 
+
 export const SearchTerm=async(req,res)=>{
     try {
         const searchTerm = req.params.searchTerm;
