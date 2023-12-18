@@ -1,5 +1,5 @@
 
-# TINY_WIKI - wIKI_HELPER with MERN Stack
+# TINY_WIKI with MERN Stack
 
 Sometimes it is difficult to find information for something you want quickly. If you are someone who likes Wikipedia but dislikes manually searching for information you need then TinyWiki is for you! TinyWiki allows you to search for a topic you need some information about and searches for information on that topic in Wikipedia for you. 🚀🐦
 
@@ -28,7 +28,7 @@ git clone https://github.com/mhdmishab/tiny_wiki.git
 
 Navigate to the `client` directory within the cloned project using the command:
 ```bash
-cd sweet_tweet/client
+cd tiny_wiki/client
  
 ```
 
