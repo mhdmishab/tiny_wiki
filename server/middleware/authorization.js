@@ -4,7 +4,8 @@ const accessTokenKey = process.env.ACCESS_TOKEN_SECRET;
 const refreshTokenKey = process.env.REFRESH_TOKEN_SECRET;
 export const isAuthenticated = (req, res, next) => {
     try {
-        let token = req.get("authorization");
+        let token = req.get("Authorization");
+        // let token = req.headers.authorization;
         console.log(token)
         if (!token) {
             return res.status(404).json({ success: false, msg: "Token not found" });
@@ -38,6 +39,7 @@ export const isAuthenticated = (req, res, next) => {
 
 export const verifyRefreshToken = (req, res) => {
     try {
+        console.log(req.body);
         const { refreshToken } = req.body;
         console.log("gdfgdg", refreshToken)
 
@@ -65,10 +67,11 @@ export const verifyRefreshToken = (req, res) => {
             }
         }
 
-        const accessToken = jwt.sign({}, accessTokenKey, {
+        const newAccessToken = jwt.sign({}, accessTokenKey, {
             expiresIn: "2m",
         });
-        return res.status(200).json({ success: true, accessToken });
+       
+        return res.status(200).json({ success: true, newAccessToken});
 
     } catch (error) {
         throw error

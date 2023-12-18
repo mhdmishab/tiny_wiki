@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
+import SearchKeyword from '../model/keywordModel.js';
 dotenv.config();
 const accessKey = process.env.ACCESS_KEY;
 const accessTokenKey = process.env.ACCESS_TOKEN_SECRET;
@@ -7,7 +8,7 @@ const refreshTokenKey = process.env.REFRESH_TOKEN_SECRET;
 
 export const adminLogin = (req, res) => {
     try {
-        const key = req.body.key;
+        const key = req.params.key;
         console.log(accessKey)
         console.log(key);
         if (key !== accessKey) {
@@ -32,6 +33,36 @@ export const adminLogin = (req, res) => {
     }
 }
 
-export const  adminDashboard = (req,res)=>{
-    res.send("admin homw here son")
+export const  adminDashboard = async(req,res)=>{
+  
+    const order = req.params.order === 'asc' ? 1 : -1;
+  console.log(order)
+
+  try {
+    const result = await SearchKeyword.aggregate([
+      { $group: { _id: '$keyword', count: { $sum: 1 } } },
+      { $sort: { count: order } },
+    ]);
+
+    res.json(result);
+  } catch (error) {
+    throw error;
+  }
+   
+}
+
+export const mostSerachedKeyword=async(req,res)=>{
+  const order = req.params.order === 'asc' ? 1 : -1;
+  console.log(order)
+
+  try {
+    const result = await SearchKeyword.aggregate([
+      { $group: { _id: '$keyword', count: { $sum: 1 } } },
+      { $sort: { count: order } },
+    ]);
+
+    res.json(result);
+  } catch (error) {
+    throw error;
+  }
 }

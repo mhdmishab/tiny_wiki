@@ -56,18 +56,4 @@ export const ReadSlug=async (req, res) => {
   }
 };
 
-export const mostSerachedKeyword=async(req,res)=>{
-  const order = req.params.order === 'asc' ? 1 : -1;
-  console.log(order)
 
-  try {
-    const result = await SearchKeyword.aggregate([
-      { $group: { _id: '$keyword', count: { $sum: 1 } } },
-      { $sort: { count: order } },
-    ]);
-
-    res.json(result);
-  } catch (error) {
-    throw error;
-  }
-}
