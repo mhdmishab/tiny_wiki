@@ -27,7 +27,7 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something went wrong!');
 });
 
-const port = process.env.PORT || 3001;
+const port = 4000;
 app.listen(port, () => {
   console.log(`app is listening on ${port}`);
 });

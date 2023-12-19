@@ -10,6 +10,6 @@ const pageDataSchema= new mongoose.Schema({
     }
 })
 
-const pageData=mongoose.model('pageData',pageDataSchema);
+const pageData=mongoose.model('pageDatas',pageDataSchema);
 
 export default pageData;
