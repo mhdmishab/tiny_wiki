@@ -60,7 +60,7 @@ cd tiny_wiki/server
 
 Before running the backend server, make sure to create an `.env` file in the `server` directory. Add the following environment variables to the file:
 ```bash
-PORT= your_port
+
 MONGO_URL= your_mongo_url
 ACCESS_KEY= your_admin_access_key
 ACCESS_TOKEN_SECRET= your_access_token_secret
